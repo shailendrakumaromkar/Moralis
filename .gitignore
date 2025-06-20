@@ -10,3 +10,5 @@ node_modules/
 env/.env.prod
 .env.*
 !.env.example
+
+Notes.txt
