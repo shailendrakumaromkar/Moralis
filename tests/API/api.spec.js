@@ -27,35 +27,35 @@ test("verify getWalletNFts endpoint - status code, status message", async () => 
   expect(response.statusText()).toBe("OK")
 })
 
-// test("verify getWalletNFts endpoint- top level field data", async () => {
-//   expect(responseData.status).toBe("SYNCED")
-//   expect(responseData.page).toBe(1)
-//   expect(responseData.page_size).toBe(100)
-//   // expect(responseData.cursor).toBe(null)
-//   expect(responseData.result).toBeInstanceOf(Array)
-//   expect(responseData.cursor).toBeTruthy()
-//   expect(responseData.cursor.length).toBeGreaterThan(0)
-// })
+test("verify getWalletNFts endpoint- top level field data", async () => {
+  expect(responseData.status).toBe("SYNCED")
+  expect(responseData.page).toBe(1)
+  expect(responseData.page_size).toBe(100)
+  // expect(responseData.cursor).toBe(null)
+  expect(responseData.result).toBeInstanceOf(Array)
+  expect(responseData.cursor).toBeTruthy()
+  expect(responseData.cursor.length).toBeGreaterThan(0)
+})
 
-// test("verify getWalletNFts endpoint- result array data", async () => {
-//   expect(responseData.result[0].owner_of).toContain(nftWalletAddress.toLowerCase())
-// })
+test("verify getWalletNFts endpoint- result array data", async () => {
+  expect(responseData.result[0].owner_of).toContain(nftWalletAddress.toLowerCase())
+})
 
-// test("verify getWalletNFts endpoint - cursor and next page data", async () => {
-//   const nextPage = responseData.cursor
-//   const nextPageResponse = await requestContext.get(
-//     `${process.env.BASE_URL}/api/v2.2/${nftWalletAddress}/nft?chain=eth&format=decimal&exclude_spam=false&cursor=${nextPage}&normalizeMetadata=true&media_items=false&include_prices=false`,
-//     {
-//       headers: {
-//         "X-API-Key": process.env.API_KEY,
-//         "content-type": "application/json"
-//       }
-//     }
-//   )
+test("verify getWalletNFts endpoint - cursor and next page data", async () => {
+  const nextPage = responseData.cursor
+  const nextPageResponse = await requestContext.get(
+    `${process.env.BASE_URL}/api/v2.2/${nftWalletAddress}/nft?chain=eth&format=decimal&exclude_spam=false&cursor=${nextPage}&normalizeMetadata=true&media_items=false&include_prices=false`,
+    {
+      headers: {
+        "X-API-Key": process.env.API_KEY,
+        "content-type": "application/json"
+      }
+    }
+  )
 
-//   const nextPageResponseData = await nextPageResponse.json()
-//   expect(nextPageResponseData.page).toBe(2)
-//   expect(nextPageResponseData.result[0].owner_of).toContain(nftWalletAddress.toLocaleLowerCase())
-// })
+  const nextPageResponseData = await nextPageResponse.json()
+  expect(nextPageResponseData.page).toBe(2)
+  expect(nextPageResponseData.result[0].owner_of).toContain(nftWalletAddress.toLocaleLowerCase())
+})
 
 
