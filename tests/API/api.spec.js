@@ -44,7 +44,7 @@ test("verify getWalletNFts endpoint- result array data", async () => {
   expect(responseData.result[0].owner_of).toContain(nftWalletAddress.toLowerCase())
 })
 
-test.only("verify getWalletNFts endpoint - cursor and next page data", async () => {
+test("verify getWalletNFts endpoint - cursor and next page data", async () => {
   const nextPage = responseData.cursor
   const nextPageResponse = await requestContext.get(
     `${Base_URL}/api/v2.2/${nftWalletAddress}/nft?chain=eth&format=decimal&exclude_spam=false&cursor=${nextPage}&normalizeMetadata=true&media_items=false&include_prices=false`,
