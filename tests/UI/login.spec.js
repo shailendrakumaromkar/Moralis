@@ -49,7 +49,7 @@ test.only("Moralis Login POM without POManager", async ({ browser }) => {
 
 })
 
-test.only("Moralis Login POM", async ({ browser }) => {
+test("Moralis Login POM", async ({ browser }) => {
     const context = await browser.newContext()
     const page = await context.newPage()
     const poManager = new POManager(page)
