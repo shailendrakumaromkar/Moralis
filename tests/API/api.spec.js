@@ -4,8 +4,6 @@ const dotenv = require('dotenv');
 dotenv.config({ path: '././env/.env.prod' })
 
 const testData = require('../../testData/API/api_Endpoint.json')
-const API_Key = process.env.API_Key
-const Base_URL = process.env.BASE_URL
 const nftWalletAddress = testData.NFT_WALLET_ADDRESS
 
 let response;
@@ -14,10 +12,10 @@ let requestContext
 test.beforeAll("Run getWalletNFTs endpoint and save response", async () => {
   requestContext = await request.newContext()
 
-  response = await requestContext.get(`${Base_URL}/api/v2.2/${nftWalletAddress}/nft?chain=eth&format=decimal&exclude_spam=false&normalizeMetadata=true&media_items=false&include_prices=false`,
+  response = await requestContext.get(`${process.env.BASE_URL}/api/v2.2/${nftWalletAddress}/nft?chain=eth&format=decimal&exclude_spam=false&normalizeMetadata=true&media_items=false&include_prices=false`,
     {
       headers: {
-        "X-API-Key": API_Key,
+        "X-API-Key": process.env.API_Key,
         "content-type": "application/json"
       }
     }
@@ -47,10 +45,10 @@ test("verify getWalletNFts endpoint- result array data", async () => {
 test("verify getWalletNFts endpoint - cursor and next page data", async () => {
   const nextPage = responseData.cursor
   const nextPageResponse = await requestContext.get(
-    `${Base_URL}/api/v2.2/${nftWalletAddress}/nft?chain=eth&format=decimal&exclude_spam=false&cursor=${nextPage}&normalizeMetadata=true&media_items=false&include_prices=false`,
+    `${process.env.BASE_URL}/api/v2.2/${nftWalletAddress}/nft?chain=eth&format=decimal&exclude_spam=false&cursor=${nextPage}&normalizeMetadata=true&media_items=false&include_prices=false`,
     {
       headers: {
-        "X-API-Key": API_Key,
+        "X-API-Key": process.env.API_Key,
         "content-type": "application/json"
       }
     }
